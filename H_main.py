@@ -7,8 +7,8 @@ import H_Katzenjagd
 
 
 N_MIN_OBJEKTE = 10
-F_BREITE = 1000
-F_HOEHE = 600
+F_BREITE = 1500
+F_HOEHE = 900
 
 pygame.init()
 fenster = pygame.display.set_mode((F_BREITE, F_HOEHE))

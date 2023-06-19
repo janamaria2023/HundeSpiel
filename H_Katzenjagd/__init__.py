@@ -6,10 +6,17 @@ class Hund(pygame.sprite.Sprite):
     def __init__(self, F_BREITE, F_HOEHE):
         super().__init__()
         self.F_BREITE = F_BREITE
-        self.F_HOEHE = F_HOEHE
+        self.F_HOEHE = F_HOEHE 
         self.image = pygame.image.load("hund.png")
+        # Define the new width and height
+        new_width = 100
+        new_height = 150
+
+        # Resize the image
+        self.image = pygame.transform.scale(self.image, (new_width, new_height))
+        
         self.rect = self.image.get_rect()
-        self.rect.center = (self.F_BREITE / 2, self.F_HOEHE / 2)
+        self.rect.center = (self.F_BREITE / 2 , self.F_HOEHE / 2 )
         self.punkte = 0
         self.leben = 7
         
@@ -46,6 +53,14 @@ class Zufallsobjekt(pygame.sprite.Sprite):
                 self.image = random.choice(Zufallsobjekt.bilder_top)
             else:
                 self.image =random.choice(Zufallsobjekt.bilder_flop)
+            
+            ####### new by Papa ###
+            new_width = 100
+            new_height = 150
+
+            # Resize the image
+            self.image = pygame.transform.scale(self.image, (new_width, new_height))
+            ####### new by Papa End ###
             
             self.rect = self.image.get_rect()
             
