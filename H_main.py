@@ -7,8 +7,8 @@ import H_Katzenjagd
 
 
 N_MIN_OBJEKTE = 10
-F_BREITE = 1500
-F_HOEHE = 900
+F_BREITE = 1300
+F_HOEHE = 700
 
 pygame.init()
 fenster = pygame.display.set_mode((F_BREITE, F_HOEHE))
@@ -56,7 +56,7 @@ while True:
          elif pygame.time.get_ticks() -t_kollision_top < 100:
              fenster.fill((0,255, 0))
          else:
-             fenster.fill((255, 255, 255))
+             fenster.fill((255, 0, 255))
              
          sprites.update()
          sprites.draw(fenster)
@@ -65,4 +65,4 @@ while True:
          H_Katzenjagd.text("leben: " + str(hund.leben), fenster, (80, F_HOEHE - 50), 30)
         
          pygame.display.flip()
-         uhr.tick(30)
+         uhr.tick(40)

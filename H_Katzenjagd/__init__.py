@@ -54,13 +54,13 @@ class Zufallsobjekt(pygame.sprite.Sprite):
             else:
                 self.image =random.choice(Zufallsobjekt.bilder_flop)
             
-            ####### new by Papa ###
+           
             new_width = 100
             new_height = 150
 
             # Resize the image
             self.image = pygame.transform.scale(self.image, (new_width, new_height))
-            ####### new by Papa End ###
+            
             
             self.rect = self.image.get_rect()
             
