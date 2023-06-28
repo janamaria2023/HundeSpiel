@@ -1,6 +1,8 @@
 import pygame
 import random
 
+pygame.init()
+#game_over = pygame.mixer.Sound("game-over.mp3")
 
 class Hund(pygame.sprite.Sprite):
     def __init__(self, F_BREITE, F_HOEHE):
@@ -36,11 +38,11 @@ class Hund(pygame.sprite.Sprite):
 class Zufallsobjekt(pygame.sprite.Sprite):
         bilder_top = [pygame.image.load("knochen.png"),
                     pygame.image.load("spielzeug.png"),
-                    pygame.image.load("wasser.png")]
+                    pygame.image.load("wassertropfen.png")]
         
-        bilder_flop = [pygame.image.load("katze.png"),
+        bilder_flop = [pygame.image.load("katze2.png"),
                     pygame.image.load("laerm.png"),
-                    pygame.image.load("kinder.png")]
+                    pygame.image.load("kinder1.png")]
         
         def __init__(self, F_BREITE, F_HOEHE):
             super().__init__()
@@ -79,12 +81,15 @@ class Zufallsobjekt(pygame.sprite.Sprite):
                 if random.randint(0, 120) == 0:
                     self.x_speed = random.randint(-2, 2)
 
-    
+
 def text(text, fenster, position, groesse):
+    #pygame.mixer.Sound.play(game_over)
     font = pygame.font.SysFont('arial', groesse)
     text = font.render(text, False, (0, 0, 0))
     F_BREITE = text.get_rect().width
     fenster.blit(text, (position[0] - (F_BREITE / 2), position[1]))
+    
+     
 
                  
               

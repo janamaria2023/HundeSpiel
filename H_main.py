@@ -3,7 +3,6 @@ dir1=os.getcwd()
 print(dir1)
 import sys
 import pygame
-
 import H_Katzenjagd
 
 
@@ -17,6 +16,10 @@ pygame.display.set_caption("Background Image")
 
 background_image = pygame.image.load('wiese4.jpg')
 background_image = pygame.transform.scale(background_image, (F_BREITE, F_HOEHE))
+
+getroffen_flop = pygame.mixer.Sound("death-sound.mp3")
+getroffen_top = pygame.mixer.Sound("success-sound.mp3")
+
 
 sprites = pygame.sprite.Group()
 hund = H_Katzenjagd.Hund(F_BREITE, F_HOEHE)
@@ -60,14 +63,15 @@ while True:
                 
             if pygame.time.get_ticks() - t_kollision_flop < 100:
                 fenster.fill((255, 0, 0))
+                pygame.mixer.Sound.play(getroffen_flop)
 
             elif pygame.time.get_ticks() -t_kollision_top < 100:
                 fenster.fill((0,255, 0))
+                pygame.mixer.Sound.play(getroffen_top)
+
             else:
-                fenster.fill((255, 0, 255))
-                
-             
-            fenster.blit( background_image, ( 0,0 ) )    
+                fenster.blit( background_image, ( 0,0 ) )
+                    
             sprites.update()
             sprites.draw(fenster)
             
@@ -77,4 +81,4 @@ while True:
             
             
             pygame.display.flip()
-            uhr.tick(40)
+            uhr.tick(80)
