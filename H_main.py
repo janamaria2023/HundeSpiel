@@ -34,55 +34,58 @@ t_kollision_flop = -100
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+
             pygame.quit()
             sys.exit()
         
 
-        n_neue_objekte = N_MIN_OBJEKTE - len(sprites) + hund.punkte // 2
+    n_neue_objekte = N_MIN_OBJEKTE - len(sprites) + hund.punkte // 2
+    
+    for i in range(n_neue_objekte):
+        sprites.add(H_Katzenjagd.Zufallsobjekt(F_BREITE, F_HOEHE))
+    
+    for sprite in sprites:
         
-        for i in range(n_neue_objekte):
-            sprites.add(H_Katzenjagd.Zufallsobjekt(F_BREITE, F_HOEHE))
-        
-        for sprite in sprites:
-            
-            if sprite != hund and pygame.sprite.collide_rect(hund, sprite):
-                if sprite.gut:
-                    hund.punkte += 1
-                    t_kollision_top = pygame.time.get_ticks()
-                else:
-                    hund.leben -= 1
-                    t_kollision_flop = pygame.time.get_ticks()
-                    if hund.leben <= 0:
-                        fenster.fill((255, 255, 255))
-                        pygame.mixer.Sound.play(game_over)
-                        pygame.time.wait(1000)
-                        H_Katzenjagd.text("GAME OVER", fenster, (F_BREITE / 2, F_HOEHE / 2), 50)
-                        H_Katzenjagd.text(str(hund.punkte) + "punkte", fenster, (F_BREITE / 2, F_HOEHE / 2 + 60), 30)
-                        pygame.display.flip()
-                        
-                        pygame.time.wait(1000)
-                        pygame.quit()
-                        sys.exit()
-                sprite.kill()
-                
-            if pygame.time.get_ticks() - t_kollision_flop < 100:
-                fenster.fill((255, 0, 0))
-                pygame.mixer.Sound.play(getroffen_flop)
-
-            elif pygame.time.get_ticks() -t_kollision_top < 100:
-                fenster.fill((0,255, 0))
-                pygame.mixer.Sound.play(getroffen_top)
-
+        if sprite != hund and pygame.sprite.collide_rect(hund, sprite):
+            if sprite.gut:
+                hund.punkte += 1
+                t_kollision_top = pygame.time.get_ticks()
             else:
-                fenster.blit( background_image, ( 0,0 ) )
+                hund.leben -= 1
+                t_kollision_flop = pygame.time.get_ticks()
+                if hund.leben <= 0:
+                    fenster.fill((255, 255, 255))
                     
-            sprites.update()
-            sprites.draw(fenster)
-            
-            H_Katzenjagd.text("punkte: " + str(hund.punkte), fenster, (F_BREITE - 100, F_HOEHE -50), 30)
-            H_Katzenjagd.text("leben: " + str(hund.leben), fenster, (80, F_HOEHE - 50), 30)
+                    pygame.time.wait(1000)
+                    H_Katzenjagd.text("GAME OVER", fenster, (F_BREITE / 2, F_HOEHE / 2), 50)
+                    H_Katzenjagd.text(str(hund.punkte) + "punkte", fenster, (F_BREITE / 2, F_HOEHE / 2 + 60), 30)
+                    pygame.display.flip()
+                    
+                    pygame.mixer.Sound.play(game_over)
 
+                    pygame.time.wait(1000)
+                    pygame.quit()
+                    sys.exit()
+            sprite.kill()
             
+    if pygame.time.get_ticks() - t_kollision_flop < 100:
+        fenster.fill((255, 0, 0))
+        pygame.mixer.Sound.play(getroffen_flop)
+
+    elif pygame.time.get_ticks() -t_kollision_top < 100:
+        fenster.fill((0,255, 0))
+        pygame.mixer.Sound.play(getroffen_top)
+
+    else:
+        fenster.blit( background_image, ( 0,0 ) )
             
-            pygame.display.flip()
-            uhr.tick(40)
+    sprites.update()
+    sprites.draw(fenster)
+    
+    H_Katzenjagd.text("punkte: " + str(hund.punkte), fenster, (F_BREITE - 100, F_HOEHE -50), 30)
+    H_Katzenjagd.text("leben: " + str(hund.leben), fenster, (80, F_HOEHE - 50), 30)
+
+    
+    
+    pygame.display.flip()
+    uhr.tick(40)
