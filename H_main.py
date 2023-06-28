@@ -19,6 +19,7 @@ background_image = pygame.transform.scale(background_image, (F_BREITE, F_HOEHE))
 
 getroffen_flop = pygame.mixer.Sound("death-sound.mp3")
 getroffen_top = pygame.mixer.Sound("success-sound.mp3")
+game_over = pygame.mixer.Sound("game-over.mp3")
 
 
 sprites = pygame.sprite.Group()
@@ -53,9 +54,12 @@ while True:
                     t_kollision_flop = pygame.time.get_ticks()
                     if hund.leben <= 0:
                         fenster.fill((255, 255, 255))
+                        pygame.mixer.Sound.play(game_over)
+                        pygame.time.wait(1000)
                         H_Katzenjagd.text("GAME OVER", fenster, (F_BREITE / 2, F_HOEHE / 2), 50)
                         H_Katzenjagd.text(str(hund.punkte) + "punkte", fenster, (F_BREITE / 2, F_HOEHE / 2 + 60), 30)
                         pygame.display.flip()
+                        
                         pygame.time.wait(1000)
                         pygame.quit()
                         sys.exit()
@@ -81,4 +85,4 @@ while True:
             
             
             pygame.display.flip()
-            uhr.tick(80)
+            uhr.tick(40)

@@ -2,7 +2,7 @@ import pygame
 import random
 
 pygame.init()
-#game_over = pygame.mixer.Sound("game-over.mp3")
+
 
 class Hund(pygame.sprite.Sprite):
     def __init__(self, F_BREITE, F_HOEHE):
@@ -83,7 +83,7 @@ class Zufallsobjekt(pygame.sprite.Sprite):
 
 
 def text(text, fenster, position, groesse):
-    #pygame.mixer.Sound.play(game_over)
+    
     font = pygame.font.SysFont('arial', groesse)
     text = font.render(text, False, (0, 0, 0))
     F_BREITE = text.get_rect().width
