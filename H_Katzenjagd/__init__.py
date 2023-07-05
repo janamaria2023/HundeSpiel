@@ -1,9 +1,6 @@
 import pygame
 import random
 
-pygame.init()
-
-
 class Hund(pygame.sprite.Sprite):
     def __init__(self, F_BREITE, F_HOEHE):
         super().__init__()
@@ -32,6 +29,8 @@ class Hund(pygame.sprite.Sprite):
              self.rect.x -= 8
          if gedrueckt[pygame.K_RIGHT]:
              self.rect.x += 8
+         if gedrueckt[pygame.K_ESCAPE]:
+             pygame.quit()  
          self.rect.clamp_ip(pygame.Rect(0, 0, self.F_BREITE, self.F_HOEHE))
          
          
@@ -63,7 +62,6 @@ class Zufallsobjekt(pygame.sprite.Sprite):
             # Resize the image
             self.image = pygame.transform.scale(self.image, (new_width, new_height))
             
-            
             self.rect = self.image.get_rect()
             
             self.rect.center = (random.randint(0, self.F_BREITE),
@@ -83,9 +81,8 @@ class Zufallsobjekt(pygame.sprite.Sprite):
 
 
 def text(text, fenster, position, groesse):
-    
     font = pygame.font.SysFont('arial', groesse)
-    text = font.render(text, False, (0, 0, 0))
+    text = font.render(text, False, (255, 255, 255))
     F_BREITE = text.get_rect().width
     fenster.blit(text, (position[0] - (F_BREITE / 2), position[1]))
     
